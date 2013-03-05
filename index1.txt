@@ -1,0 +1,5 @@
+0 Sydney
+1 Alice Spring
+2 Canberra
+3 Bathurst
+4 Orange
