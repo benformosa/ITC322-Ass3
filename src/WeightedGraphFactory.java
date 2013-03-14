@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Handles input parsing to create WeightedGraphs from input
@@ -62,5 +64,82 @@ public class WeightedGraphFactory {
 			}
 		}
 		return w;
+	}
+
+	/**
+	 * Apply labels to a WeightedGraph given an array of labels
+	 * 
+	 * @param w
+	 *            WeightedGraph to label
+	 * @param labels
+	 *            an array of Objects, where labels[n] is the label for vertex n
+	 *            in w
+	 * @return the labeled WeightedGraph
+	 */
+	public static WeightedGraph label(WeightedGraph w, Object[] labels) {
+		for (int i = 0; i < w.size(); i++) {
+			w.setLabel(i, labels[i]);
+		}
+		return w;
+	}
+
+	/**
+	 * Apply labels to a WeightedGraph given a file containing labels.
+	 * 
+	 * Each line in the file should follow the format as listed in
+	 * WeightedGraphFactory.labelFromReader
+	 * 
+	 * @param w
+	 *            WeightedGraph to label
+	 * @param filename
+	 *            the file containing the labels
+	 * @return the labeled WeightedGraph
+	 * @throws NumberFormatException
+	 *             if the index is non-numeric
+	 * @throws IOException
+	 */
+	public static WeightedGraph labelFromFile(WeightedGraph w, String filename)
+			throws NumberFormatException, IOException {
+		return labelFromReader(w, new FileReader(filename));
+	}
+
+	/**
+	 * Apply labels to a WeightedGraph given a Reader
+	 * 
+	 * The input should be in the form of a line for each vertex of the graph,
+	 * starting with the index, then a space, then a string to apply as the
+	 * label. e.g. 0 label0 1 label1
+	 * 
+	 * @param w
+	 *            WeightedGraph to label
+	 * @param r
+	 *            Reader to read
+	 * @return the labeled WeightedGraph
+	 * @throws NumberFormatException
+	 *             if the index is non-numeric
+	 * @throws IOException
+	 */
+	
+	public static WeightedGraph labelFromReader(WeightedGraph w, Reader r)
+			throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(r);
+		String line;
+		// an associative array where the key is the index and the value is the label
+		Map<Integer, String> map = new HashMap<Integer, String>();
+
+		//read the input and add each label to the Map
+		while ((line = br.readLine()) != null && !("".equals(line))) {
+			map.put(Integer.parseInt(line.split(" ", 2)[0]),
+					line.split(" ", 2)[1]);
+		}
+
+		// convert the Map into an array. I'm doing this here as we didn't know the length of the input before
+		Object[] labels = new String[map.size()];
+		for (Object i : map.entrySet().toArray()) {
+			@SuppressWarnings("unchecked") //if this isn't a Map.Entry<Integer, String>, we would have thrown an exception when creating it
+			Map.Entry<Integer, String> j = (Map.Entry<Integer, String>) i;
+			labels[j.getKey()] = j.getValue();
+		}
+		return label(w, labels);
 	}
 }
