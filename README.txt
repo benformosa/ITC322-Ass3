@@ -15,7 +15,7 @@ Building and Running:
 		mkdir bin
 		javac -classpath bin -sourcepath src -d bin src/*.java
 *Run
-		java -classpath bin TravelPlan
+		java -classpath bin TravelTest
 	
 Explanation:
 

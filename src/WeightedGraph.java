@@ -8,7 +8,7 @@ import edu.colorado.graphs.Graph;
 public class WeightedGraph extends Graph { // implements Cloneable {
 	private int[][] weight; // edge weights, such that edge[a][b] has a weight
 							// of weights[a][b]
-
+	
 	/**
 	 * Creates an empty WeightedGraph with n vertices
 	 * 
