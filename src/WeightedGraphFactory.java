@@ -77,7 +77,7 @@ public class WeightedGraphFactory {
 	 * @return the labeled WeightedGraph
 	 */
 	public static WeightedGraph label(WeightedGraph w, Object[] labels) {
-		for (int i = 0; i < w.size(); i++) {
+		for (int i = 0; i < labels.length; i++) {
 			w.setLabel(i, labels[i]);
 		}
 		return w;
@@ -119,24 +119,28 @@ public class WeightedGraphFactory {
 	 *             if the index is non-numeric
 	 * @throws IOException
 	 */
-	
+
 	public static WeightedGraph labelFromReader(WeightedGraph w, Reader r)
 			throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(r);
 		String line;
-		// an associative array where the key is the index and the value is the label
+		// an associative array where the key is the index and the value is the
+		// label
 		Map<Integer, String> map = new HashMap<Integer, String>();
 
-		//read the input and add each label to the Map
+		// read the input and add each label to the Map
 		while ((line = br.readLine()) != null && !("".equals(line))) {
 			map.put(Integer.parseInt(line.split(" ", 2)[0]),
 					line.split(" ", 2)[1]);
 		}
 
-		// convert the Map into an array. I'm doing this here as we didn't know the length of the input before
+		// convert the Map into an array. I'm doing this here as we didn't know
+		// the length of the input before
 		Object[] labels = new String[map.size()];
 		for (Object i : map.entrySet().toArray()) {
-			@SuppressWarnings("unchecked") //if this isn't a Map.Entry<Integer, String>, we would have thrown an exception when creating it
+			@SuppressWarnings("unchecked")
+			// if this isn't a Map.Entry<Integer, String>, we would have thrown
+			// an exception when creating it
 			Map.Entry<Integer, String> j = (Map.Entry<Integer, String>) i;
 			labels[j.getKey()] = j.getValue();
 		}

@@ -8,7 +8,7 @@ import edu.colorado.graphs.Graph;
 public class WeightedGraph extends Graph { // implements Cloneable {
 	private int[][] weight; // edge weights, such that edge[a][b] has a weight
 							// of weights[a][b]
-	
+
 	/**
 	 * Creates an empty WeightedGraph with n vertices
 	 * 
@@ -23,6 +23,17 @@ public class WeightedGraph extends Graph { // implements Cloneable {
 	public void addEdge(int source, int target, int weight) {
 		super.addEdge(source, target);
 		this.setWeight(source, target, weight);
+	}
+
+	@Override
+	public Object getLabel(int vertex) {
+		Object l = super.getLabel(vertex);
+
+		// if(l.equals(null)) {
+		if (l == null) {
+			l = vertex;
+		}
+		return l;
 	}
 
 	/**
