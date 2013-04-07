@@ -4,14 +4,23 @@ public class TravelTest {
 
 	public static void main(String[] args) throws IOException {
 
-		WeightedGraph w = WeightedGraphFactory.fromFile("distance.txt", false);
+		WeightedGraph w = WeightedGraphFactory.fromFile("distance1.txt", false);
 
-		 w = WeightedGraphFactory.labelFromFile(w, "index.txt");
+//		w = WeightedGraphFactory.labelFromFile(w, "index1.txt");
+		
+		int source;
+		int target;
+//		source = w.labelToIndex("Selim");
+//		target = w.labelToIndex("Cup");
+		
+		source = 0;
+		target = 2;
 
-		System.out.println("find path 0 -> 18");
-		Path p = TravelPlan.findPath(w, 0, 18);
-		System.out.println(p.toStringSimple());
+		Path p = TravelPlan.findPath(w, source, target);
 		System.out.println(p);
+		System.out.println(p.distanceTo(target));
+		System.out.println();
+		System.out.println(p.pathTo(target));
 
 	}
 }

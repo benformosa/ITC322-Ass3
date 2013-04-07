@@ -24,7 +24,7 @@ public class Graph implements Cloneable {
 	// 3. For any two vertices i and j, edges[i][j] is true if there is a
 	// vertex from i to j; otherwise edges[i][j] is false.
 	private boolean[][] edges;
-	private Object[] labels;
+	protected Object[] labels;
 
 	/**
 	 * Initialize a <CODE>Graph</CODE> with <CODE>n</CODE> vertices, no edges,

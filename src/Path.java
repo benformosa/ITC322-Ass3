@@ -30,6 +30,21 @@ public class Path {
 		this.previous = previous;
 		this.source = source;
 	}
+	
+	public int distanceTo(int target) {
+		return this.distance[target];
+	}
+	
+	public int[] pathTo(int target) {
+		int[] p = {0};
+		
+		int v = target;
+		while(v != source) {
+			System.out.println(v);
+			v = previous[v];
+		}
+		return p;
+	}
 
 	private String tidyLabel(Object o) {
 		String c = "";

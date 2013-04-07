@@ -21,3 +21,5 @@ Explanation:
 
 The first step in this project was creating a sub class of Graph, WeightedGraph. This just adds a 2D array of ints to store each edge's weight. I figured adding another array would be simpler than replacing the boolean array in Graph.
 
+In order to implement labelToIndex(), I changed the access level of Graph.labels to protected to allow the subclass WeightedGraph to use it.
+
