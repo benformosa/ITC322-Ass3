@@ -8,7 +8,7 @@ public class TravelPlan {
 		int closest = 0;
 		int minDistance = INFINITY;
 		for (int candidate : remainingCities) {
-			if (distance[candidate] <= minDistance) {
+			if (distance[candidate] < minDistance) {
 				minDistance = distance[candidate];
 				closest = candidate;
 			}
@@ -42,6 +42,7 @@ public class TravelPlan {
 					if (sum < distance[v]) {
 						distance[v] = sum;
 						previous[v] = next;
+						remainingCities.add(v);
 					}
 				}
 			}
