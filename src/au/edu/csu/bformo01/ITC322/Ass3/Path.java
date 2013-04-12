@@ -85,10 +85,9 @@ public class Path {
 		return l;
 	}
 
-	public String pathToToString(int target) {
+	public static String pathToToString(WeightedGraph w, ArrayList<Integer> p) {
 		String s = "";
 		String sep = " -> ";
-		ArrayList<Integer> p = pathTo(target);
 		for (int i : p) {
 			s += w.getStringLabel(i);
 			s += sep;

@@ -16,6 +16,10 @@ public class TravelPlanInteractive {
 
 		System.out.println("Ben Formosa (11429074) ITC322 Assignment 3");
 
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Index File [distance.txt]: ");
+		System.out.print("Index file [index.txt]: ");
+
 		// prompt for data file names
 
 		WeightedGraph w = WeightedGraphFactory.fromFile("distance.txt", false);
@@ -33,7 +37,7 @@ public class TravelPlanInteractive {
 		// calculate path, display
 
 		// get input
-		Scanner sc = new Scanner(System.in).useDelimiter(", ");
+		sc = new Scanner(System.in).useDelimiter(", ");
 		System.out.print("Source, Destination: ");
 		String strSource = sc.next().trim();
 		String strTarget = sc.next().trim();
@@ -55,7 +59,7 @@ public class TravelPlanInteractive {
 			System.out.println("The souce and destination are the same");
 		} else {
 			// print path and distance from source to target
-			System.out.println(path.pathToToString(target));
+			System.out.println(Path.pathToToString(w, path.pathTo(target)));
 			System.out.println("Distance: " + path.distanceTo(target));
 		}
 	}
