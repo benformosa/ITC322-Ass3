@@ -4,7 +4,8 @@ import java.util.Set;
 public class TravelPlan {
 	private final static int INFINITY = Integer.MAX_VALUE;
 
-	private static int closestCity(int[] distance, Set<Integer> remainingCities) {
+	private static int closestCity(Integer[] distance,
+			Set<Integer> remainingCities) {
 		int closest = 0;
 		int minDistance = INFINITY;
 		for (int candidate : remainingCities) {
@@ -17,9 +18,8 @@ public class TravelPlan {
 	}
 
 	public static Path findPath(WeightedGraph w, int source, int target) {
-
-		int[] distance = new int[w.size()];
-		int[] previous = new int[w.size()];
+		Integer[] distance = new Integer[w.size()];
+		Integer[] previous = new Integer[w.size()];
 		Set<Integer> remainingCities = new HashSet<Integer>(w.size());
 		Set<Integer> calculatedCities = new HashSet<Integer>(w.size());
 
@@ -50,7 +50,4 @@ public class TravelPlan {
 
 		return new Path(w, distance, previous, source);
 	}
-	
-	
-	
 }

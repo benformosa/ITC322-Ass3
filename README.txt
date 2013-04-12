@@ -23,3 +23,4 @@ The first step in this project was creating a sub class of Graph, WeightedGraph.
 
 In order to implement labelToIndex(), I changed the access level of Graph.labels to protected to allow the subclass WeightedGraph to use it.
 
+I used Integer instead of int for the arrays holding the distance to each city. This was to make using ArrayList simpler, as it doesn't play too nicely with primitives. An ArrayList was chosen to take advantage of the Collections.reverse() method.

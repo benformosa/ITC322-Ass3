@@ -1,18 +1,23 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * Holds the path taken and distances along a path through a WeightedGraph
  * 
- * 
+ * As a path is calculated from a source vertex to each other vertex, we only
+ * need to store the source vertex.
  */
 public class Path {
 	public final WeightedGraph w;
-	public final int[] distance;
-	public final int[] previous;
+	public final Integer[] distance;
+	public final Integer[] previous;
 	public final int source;
 
 	/**
 	 * Create a path along a WeightedGraph
 	 * 
-	 * A Path is the result of determining the distance from one vertex (the source) in a WeightedGraph to all other vertices. 
+	 * A Path is the result of determining the distance from one vertex (the
+	 * source) in a WeightedGraph to all other vertices.
 	 * 
 	 * @param w
 	 *            the WeightedGraph this Path is in
@@ -22,42 +27,60 @@ public class Path {
 	 * @param previous
 	 *            an array where the previous step along the path from the start
 	 *            to n is previous[n]
-	 * @param source the vertex from which distances are measured
+	 * @param source
+	 *            the vertex from which distances are measured
 	 */
-	public Path(WeightedGraph w, int[] distances, int[] previous, int source) {
+	public Path(WeightedGraph w, Integer[] distances, Integer[] previous,
+			int source) {
 		this.w = w;
 		this.distance = distances;
 		this.previous = previous;
 		this.source = source;
 	}
-	
+
+	/**
+	 * The distance from the source to a given vertex
+	 * 
+	 * @param target
+	 *            vertex to find distance to
+	 * @return distance to target
+	 */
 	public int distanceTo(int target) {
 		return this.distance[target];
 	}
-	
-	public int[] pathTo(int target) {
-		int[] p = {0};
-		
+
+	/**
+	 * Returns an ArrayList with the traversed vertices on the path from the
+	 * source to a given vertex
+	 * 
+	 * If l is an ArrayList returned from this method, l.get(0) will give the
+	 * source, l.get(l.size()) will give target If the target is not in the
+	 * path, the returned ArrayList will be empty
+	 * 
+	 * @param target
+	 *            vertex to find the path to
+	 * @return ArrayList with vertices on the path to target
+	 */
+	public ArrayList<Integer> pathTo(int target) {
+		ArrayList<Integer> l = new ArrayList<Integer>();
+
+		// starting at the target, walk through the previous array until we
+		// reach the source
 		int v = target;
-		while(v != source) {
-			System.out.println(v);
-			v = previous[v];
-		}
-		return p;
-	}
-
-	private String tidyLabel(Object o) {
-		String c = "";
-
-		try {
-			c = o.toString();
-		} catch (ClassCastException e) {
+		l.add(v);
+		while (v != source) {
+			try {
+				v = previous[v];
+				l.add(v);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				// if previous[v] doesn't exist, return an empty ArrayList
+				// immediately
+				return new ArrayList<Integer>();
+			}
 		}
 
-		if (o.getClass().isAssignableFrom(int.class)) {
-			c = Integer.toString((int) o);
-		}
-		return c;
+		Collections.reverse(l);
+		return l;
 	}
 
 	@Override
@@ -65,16 +88,16 @@ public class Path {
 		String s = "";
 
 		for (int i = 0; i < distance.length; i++) {
-			System.out.println("source to " + tidyLabel(w.getLabel(i)) + " = "
-					+ distance[i]);
+			System.out.println(w.getStringLabel(source) + " to "
+					+ w.getStringLabel(i) + " = " + distance[i]);
 		}
 
 		for (int i = 0; i < previous.length; i++) {
 			try {
-				System.out.println(tidyLabel(w.getLabel(i)) + ": last hop was "
-					+ tidyLabel(w.getLabel(previous[i])));
-			} catch(ArrayIndexOutOfBoundsException e) {
-				System.out.println(tidyLabel(w.getLabel(i)) + " was never visited");
+				System.out.println(w.getStringLabel(i) + ": last hop was "
+						+ w.getStringLabel(previous[i]));
+			} catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println(w.getStringLabel(i) + " was never visited");
 			}
 		}
 

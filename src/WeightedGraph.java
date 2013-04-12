@@ -47,6 +47,29 @@ public class WeightedGraph extends Graph { // implements Cloneable {
 	}
 
 	/**
+	 * Returns a Label for a vertex that will always be a String. Equivalent to
+	 * getLabel(vertex).toString()
+	 * 
+	 * @param vertex
+	 *            vertex to get the label of
+	 * @return String label of the vertex
+	 */
+	public String getStringLabel(int vertex) {
+		return getLabel(vertex).toString();
+	}
+
+	/**
+	 * Get the weight of a given edge
+	 * 
+	 * @param source
+	 * @param target
+	 * @return
+	 */
+	public int getWeight(int source, int target) {
+		return weight[source][target];
+	}
+
+	/**
 	 * Return the index of the first vertex with the given label
 	 * 
 	 * @param label
@@ -61,17 +84,6 @@ public class WeightedGraph extends Graph { // implements Cloneable {
 			}
 		}
 		return -1;
-	}
-
-	/**
-	 * Get the weight of a given edge
-	 * 
-	 * @param source
-	 * @param target
-	 * @return
-	 */
-	public int getWeight(int source, int target) {
-		return weight[source][target];
 	}
 
 	public void setWeight(int source, int target, int w) {
