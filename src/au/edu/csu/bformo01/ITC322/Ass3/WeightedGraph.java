@@ -1,4 +1,5 @@
 package au.edu.csu.bformo01.ITC322.Ass3;
+
 import edu.colorado.graphs.Graph;
 
 /**

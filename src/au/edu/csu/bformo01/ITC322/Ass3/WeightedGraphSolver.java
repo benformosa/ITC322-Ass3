@@ -2,13 +2,12 @@ package au.edu.csu.bformo01.ITC322.Ass3;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 
 public class WeightedGraphSolver {
 	private final static int INFINITY = Integer.MAX_VALUE;
 
 	private static int closestVertex(Integer[] distance,
-			Set<Integer> remainingVertices) {
+			HashSet<Integer> remainingVertices) {
 		int closest = 0;
 		int minDistance = INFINITY;
 		for (int candidate : remainingVertices) {
@@ -20,11 +19,20 @@ public class WeightedGraphSolver {
 		return closest;
 	}
 
+	public static ArrayList<Path> findAllPaths(WeightedGraph w) {
+		ArrayList<Path> l = new ArrayList<Path>();
+
+		for (int i = 0; i < w.size(); i++) {
+			l.add(WeightedGraphSolver.findPath(w, i));
+		}
+		return l;
+	}
+
 	public static Path findPath(WeightedGraph w, int source) {
 		Integer[] distance = new Integer[w.size()];
 		Integer[] previous = new Integer[w.size()];
-		Set<Integer> remainingVertices = new HashSet<Integer>(w.size());
-		Set<Integer> calculatedVertices = new HashSet<Integer>(w.size());
+		HashSet<Integer> remainingVertices = new HashSet<Integer>(w.size());
+		HashSet<Integer> calculatedVertices = new HashSet<Integer>(w.size());
 
 		for (int i = 0; i < distance.length; i++) {
 			distance[i] = INFINITY;
@@ -51,14 +59,5 @@ public class WeightedGraphSolver {
 			}
 		}
 		return new Path(w, distance, previous, source);
-	}
-	
-	public static ArrayList<Path> findAllPaths(WeightedGraph w) {
-		ArrayList<Path> l = new ArrayList<Path>();
-		
-		for(int i = 0; i < w.size(); i++){
-			l.add(WeightedGraphSolver.findPath(w, i));
-		}
-		return l;		
 	}
 }

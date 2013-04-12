@@ -1,3 +1,5 @@
+package au.edu.csu.bformo01.ITC322.Ass3;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -81,6 +83,19 @@ public class Path {
 
 		Collections.reverse(l);
 		return l;
+	}
+
+	public String pathToToString(int target) {
+		String s = "";
+		String sep = " -> ";
+		ArrayList<Integer> p = pathTo(target);
+		for (int i : p) {
+			s += w.getStringLabel(i);
+			s += sep;
+		}
+		// get rid of that last seperator
+		s = s.replaceAll(sep + "$", "");
+		return s;
 	}
 
 	@Override
