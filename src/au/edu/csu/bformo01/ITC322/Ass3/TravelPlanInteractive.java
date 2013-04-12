@@ -32,27 +32,31 @@ public class TravelPlanInteractive {
 		// prompt
 		// calculate path, display
 
+		// get input
 		Scanner sc = new Scanner(System.in).useDelimiter(", ");
 		System.out.print("Source, Destination: ");
-		String source = sc.next();
-		String target = sc.next();
+		String strSource = sc.next().trim();
+		String strTarget = sc.next().trim();
 
-		Path path = WeightedGraphSolver.findPath(w, w.labelToIndex(source));
-		ArrayList<Integer> p = path.pathTo(w.labelToIndex(target));
+		// convert city names to indexes
+		int source = w.labelToIndex(strSource);
+		int target = w.labelToIndex(strTarget);
 
-		System.out.println(path.pathToToString(w.labelToIndex(target)));
+		// find the shorted path
+		Path path = WeightedGraphSolver.findPath(w, source);
 
-		// if(p.size() == 0) {
-		// System.out.println("There's no route from " + source + " to " +
-		// target);
-		// } else if(p.size() == 1) {
-		// System.out.println("The souce and destination are the same");
-		// }
-		//
-		// for(int i : p) {
-		// System.out.print(w.getStringLabel(i));
-		// }
+		// get the visited cities
+		ArrayList<Integer> p = path.pathTo(target);
 
+		if (p.size() == 0) {
+			System.out.println("There's no route from " + strSource + " to "
+					+ strTarget);
+		} else if (p.size() == 1) {
+			System.out.println("The souce and destination are the same");
+		} else {
+			// print path and distance from source to target
+			System.out.println(path.pathToToString(target));
+			System.out.println("Distance: " + path.distanceTo(target));
+		}
 	}
-
 }

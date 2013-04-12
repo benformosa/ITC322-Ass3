@@ -10,21 +10,6 @@ public class TravelTest {
 		WeightedGraph w = WeightedGraphFactory.fromFile("distance.txt", false);
 		w = WeightedGraphFactory.labelFromFile(w, "index.txt");
 
-		/*
-		 * int source; int target; // source = w.labelToIndex("Selim"); //
-		 * target = w.labelToIndex("Firo");
-		 * 
-		 * source = 0; target = 2;
-		 * 
-		 * Path p = TravelPlan.findPath(w, source, target);
-		 * System.out.println(p); System.out.println(p.distanceTo(target));
-		 * System.out.println("path from " + w.getStringLabel(source) + " to " +
-		 * w.getStringLabel(target)); for (int i : p.pathTo(target)) {
-		 * System.out.println(w.getStringLabel(i)); }
-		 */
-
-		// -----------------------
-
 		ArrayList<Path> l = WeightedGraphSolver.findAllPaths(w);
 
 		for (Path p : l) {
@@ -32,5 +17,23 @@ public class TravelTest {
 				System.out.println(p.pathToToString(i));
 			}
 		}
+
+		int source;
+		int target;
+		source = w.labelToIndex("Haxix");
+		target = w.labelToIndex("Cera");
+
+		// source = 0;
+		// target = 2;
+
+		Path p = WeightedGraphSolver.findPath(w, source);
+		System.out.println(p);
+		System.out.println(p.distanceTo(target));
+		System.out.println("path from " + w.getStringLabel(source) + " to "
+				+ w.getStringLabel(target));
+		for (int i : p.pathTo(target)) {
+			System.out.println(w.getStringLabel(i));
+		}
+
 	}
 }

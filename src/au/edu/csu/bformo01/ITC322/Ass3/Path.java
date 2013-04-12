@@ -93,7 +93,7 @@ public class Path {
 			s += w.getStringLabel(i);
 			s += sep;
 		}
-		// get rid of that last seperator
+		// get rid of that last separator
 		s = s.replaceAll(sep + "$", "");
 		return s;
 	}
