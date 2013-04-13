@@ -1,5 +1,3 @@
-package au.edu.csu.bformo01.ITC322.Ass3;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,12 +6,55 @@ import java.util.Collections;
  * 
  * As a path is calculated from a source vertex to each other vertex, we only
  * need to store the source vertex.
+ * 
+ * @author Ben Formosa, Student No. 11429074
  */
 public class Path {
-	public final WeightedGraph w;
 	public final Integer[] distance;
 	public final Integer[] previous;
 	public final int source;
+	public final WeightedGraph w;
+
+	/**
+	 * pathToToString without attempting to use labels
+	 * 
+	 * @param p
+	 *            an ArrayList containing the vertices on the path, Usually the
+	 *            output from Path.pathTo()
+	 * @return a String with each vertex on the path's index, separated with ->
+	 */
+	public static String pathToToString(ArrayList<Integer> p) {
+		return Path.pathToToString(null, p);
+	}
+
+	/**
+	 * A string representation of the path from the source to a given vertex.
+	 * 
+	 * @param w
+	 *            the WeightedGraph used in calculating the path
+	 * @param p
+	 *            an ArrayList containing the vertices on the path, Usually the
+	 *            output from Path.pathTo()
+	 * @return a String with each vertex on the path's label using
+	 *         WeightedGraph.getStringLabel(), separated with ->
+	 */
+	public static String pathToToString(WeightedGraph w, ArrayList<Integer> p) {
+		String s = "";
+		String sep = " -> ";
+		for (int i : p) {
+			// don't get the label if w is null, ie if we are running
+			// pathToToString(ArrayList<Integer> p)
+			if (w != null) {
+				s += w.getStringLabel(i);
+			} else {
+				s += Integer.toString(i);
+			}
+			s += sep;
+		}
+		// get rid of that last separator
+		s = s.replaceAll(sep + "$", "");
+		return s;
+	}
 
 	/**
 	 * Create a path along a WeightedGraph
@@ -80,23 +121,16 @@ public class Path {
 				return new ArrayList<Integer>();
 			}
 		}
-
 		Collections.reverse(l);
 		return l;
 	}
 
-	public static String pathToToString(WeightedGraph w, ArrayList<Integer> p) {
-		String s = "";
-		String sep = " -> ";
-		for (int i : p) {
-			s += w.getStringLabel(i);
-			s += sep;
-		}
-		// get rid of that last separator
-		s = s.replaceAll(sep + "$", "");
-		return s;
-	}
-
+	/**
+	 * String representation of the path.
+	 * 
+	 * First prints the distance from the source to each vertex, then each city
+	 * and the previous city to it on the path from the source
+	 */
 	@Override
 	public String toString() {
 		String s = "";
@@ -113,21 +147,6 @@ public class Path {
 			} catch (ArrayIndexOutOfBoundsException e) {
 				System.out.println(w.getStringLabel(i) + " was never visited");
 			}
-		}
-
-		return s;
-	}
-
-	public String toStringSimple() {
-		String s = "";
-		for (int i = 0; i < distance.length; i++) {
-			s += i;
-			s += ":";
-			s += previous[i];
-			s += "(";
-			s += distance[i];
-			s += ")";
-			s += ",";
 		}
 		return s;
 	}

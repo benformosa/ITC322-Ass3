@@ -1,5 +1,3 @@
-package au.edu.csu.bformo01.ITC322.Ass3;
-
 import edu.colorado.graphs.Graph;
 
 /**
@@ -7,9 +5,11 @@ import edu.colorado.graphs.Graph;
  * 
  * @author Ben Formosa, Student No. 11429074
  */
-public class WeightedGraph extends Graph { // implements Cloneable {
-	private int[][] weight; // edge weights, such that edge[a][b] has a weight
-							// of weights[a][b]
+public class WeightedGraph extends Graph {
+	/**
+	 * edge weights, such that edge[a][b] has a weight of weights[a][b]
+	 */
+	private int[][] weight;
 
 	/**
 	 * Creates an empty WeightedGraph with n vertices
@@ -22,6 +22,16 @@ public class WeightedGraph extends Graph { // implements Cloneable {
 		this.weight = new int[n][n];
 	}
 
+	/**
+	 * Add an edge to this WeightedGraph with a specified weight
+	 * 
+	 * @param source
+	 *            source vertex of the edge
+	 * @param target
+	 *            target vertex of the edge
+	 * @param weight
+	 *            weight of the edge
+	 */
 	public void addEdge(int source, int target, int weight) {
 		super.addEdge(source, target);
 		this.setWeight(source, target, weight);
@@ -64,8 +74,10 @@ public class WeightedGraph extends Graph { // implements Cloneable {
 	 * Get the weight of a given edge
 	 * 
 	 * @param source
+	 *            source vertex of the edge to find the weight of
 	 * @param target
-	 * @return
+	 *            target vertex
+	 * @return weight of the edge source, target
 	 */
 	public int getWeight(int source, int target) {
 		return weight[source][target];
@@ -88,7 +100,21 @@ public class WeightedGraph extends Graph { // implements Cloneable {
 		return -1;
 	}
 
+	/**
+	 * Set the weight of an edge
+	 * 
+	 * Does nothing if the edge source, target doesn't exist
+	 * 
+	 * @param source
+	 *            source vertex of the edge to set a weight on
+	 * @param target
+	 *            target vertex
+	 * @param w
+	 *            weight to set
+	 */
 	public void setWeight(int source, int target, int w) {
-		this.weight[source][target] = w;
+		if (this.isEdge(source, target)) {
+			this.weight[source][target] = w;
+		}
 	}
 }

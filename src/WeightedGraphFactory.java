@@ -1,5 +1,3 @@
-package au.edu.csu.bformo01.ITC322.Ass3;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,6 +7,8 @@ import java.util.Map;
 
 /**
  * Handles input parsing to create WeightedGraphs from input
+ * 
+ * @author Ben Formosa, Student No. 11429074
  */
 public class WeightedGraphFactory {
 	/**
@@ -121,7 +121,6 @@ public class WeightedGraphFactory {
 	 *             if the index is non-numeric
 	 * @throws IOException
 	 */
-
 	public static WeightedGraph labelFromReader(WeightedGraph w, Reader r)
 			throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(r);
