@@ -71,6 +71,10 @@ public class WeightedGraphFactory {
 	/**
 	 * Apply labels to a WeightedGraph given an array of labels
 	 * 
+	 * If labels.length < w.size(), only the first vertices will be labeled,
+	 * others will remain unlabeled. If labels.length > w.size(), extra labels
+	 * will be ignored
+	 * 
 	 * @param w
 	 *            WeightedGraph to label
 	 * @param labels
@@ -80,7 +84,12 @@ public class WeightedGraphFactory {
 	 */
 	public static WeightedGraph label(WeightedGraph w, Object[] labels) {
 		for (int i = 0; i < labels.length; i++) {
-			w.setLabel(i, labels[i]);
+			try {
+				w.setLabel(i, labels[i]);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				// don't try to label vertex i, index input is probably too long
+				// for this WeightedGraph
+			}
 		}
 		return w;
 	}

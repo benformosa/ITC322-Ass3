@@ -45,8 +45,8 @@ public class WeightedGraph extends Graph {
 	 * 
 	 * @param vertex
 	 *            vertex to get the label of
-	 * @return the label of the vertex, or if it is null, the integer index of
-	 *         the vertex
+	 * @return the label of the vertex, or if it is null, the int index of the
+	 *         vertex
 	 */
 	@Override
 	public Object getLabel(int vertex) {
@@ -86,6 +86,9 @@ public class WeightedGraph extends Graph {
 	/**
 	 * Return the index of the first vertex with the given label
 	 * 
+	 * If the parameter label is a String, and can be parsed into an int equal
+	 * to an int label of a vertex, that vertex's index will be returned
+	 * 
 	 * @param label
 	 *            Object to search for
 	 * @return index of the vertex with the given label, or -1 if the label is
@@ -93,8 +96,21 @@ public class WeightedGraph extends Graph {
 	 */
 	public int labelToIndex(Object label) {
 		for (int i = 0; i < labels.length; i++) {
-			if (labels[i].equals(label)) {
+			// the overridden getLabel won't return null, so we can safely try
+			// .equals()
+			if (this.getLabel(i).equals(label)) {
 				return i;
+				// if label is a String containing an int, which is i's label
+			} else if (label instanceof String) {
+				try {
+					if (this.getLabel(i).equals(
+							Integer.parseInt((String) label))) {
+						return i;
+					}
+
+				} catch (NumberFormatException e) {
+					// can't convert String to int
+				}
 			}
 		}
 		return -1;

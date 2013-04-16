@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Ben Formosa, Student No. 11429074
  * 
  */
-public class TravelPlanInteractive {
+public class TravelPlan {
 
 	/**
 	 * Get city names in the form "source, target" from standard input.
@@ -77,32 +77,34 @@ public class TravelPlanInteractive {
 
 		InputStreamReader in = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(in);
+		WeightedGraph w;
 
 		System.out.print("Distance File [" + defaultDistance + "]: ");
 		String distance = br.readLine();
-		System.out.print("Index file [" + defaultIndex + "]: ");
-		String index = br.readLine();
 
 		if ("".equals(distance)) {
 			distance = defaultDistance;
 		}
-		if ("".equals(index)) {
-			index = defaultIndex;
-		}
-
-		WeightedGraph w;
 
 		// if a FileNotFoundException is thrown, just use the default
 		try {
 			w = WeightedGraphFactory.fromFile(distance, false);
 		} catch (IOException e) {
+			System.err.println("using default file " + defaultDistance);
 			w = WeightedGraphFactory.fromFile(defaultDistance, false);
+		}
+
+		System.out.print("Index file [" + defaultIndex + "]: ");
+		String index = br.readLine();
+
+		if ("".equals(index)) {
+			index = defaultIndex;
 		}
 
 		try {
 			w = WeightedGraphFactory.labelFromFile(w, index);
 		} catch (IOException e) {
-			w = WeightedGraphFactory.labelFromFile(w, defaultIndex);
+			System.err.println("index file not found");
 		}
 
 		return w;
@@ -132,9 +134,8 @@ public class TravelPlanInteractive {
 		}
 		System.out.println();
 
-		// // keep prompting for input until a blank line is entered
+		// keep prompting for input until a blank line is entered
 		while (true) {
-
 			System.out.print("Source, Destination: ");
 
 			// loop until real city names are entered

@@ -10,11 +10,6 @@ import java.util.Collections;
  * @author Ben Formosa, Student No. 11429074
  */
 public class Path {
-	public final Integer[] distance;
-	public final Integer[] previous;
-	public final int source;
-	public final WeightedGraph w;
-
 	/**
 	 * pathToToString without attempting to use labels
 	 * 
@@ -55,6 +50,13 @@ public class Path {
 		s = s.replaceAll(sep + "$", "");
 		return s;
 	}
+
+	public final Integer[] distance;
+	public final Integer[] previous;
+
+	public final int source;
+
+	public final WeightedGraph w;
 
 	/**
 	 * Create a path along a WeightedGraph

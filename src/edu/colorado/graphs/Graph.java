@@ -83,6 +83,7 @@ public class Graph implements Cloneable {
 	 * @throws OutOfMemoryError
 	 *             Indicates insufficient memory for creating the clone.
 	 **/
+	@Override
 	public Object clone() { // Clone a Graph object.
 		Graph answer;
 
@@ -97,8 +98,8 @@ public class Graph implements Cloneable {
 			throw new InternalError(e.toString());
 		}
 
-		answer.edges = (boolean[][]) edges.clone();
-		answer.labels = (Object[]) labels.clone();
+		answer.edges = edges.clone();
+		answer.labels = labels.clone();
 
 		return answer;
 	}
