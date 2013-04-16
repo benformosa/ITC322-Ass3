@@ -14,7 +14,6 @@ src/TravelPlan.java - main class, interactively find paths and distances between
 bin/		- directory for compiled classes
 .classpath	- eclipse classpath file
 .project	- eclipse project file
-.settings/	- eclipse settings directory
 distance.txt, index.txt - input files
 
 Building and Running:
